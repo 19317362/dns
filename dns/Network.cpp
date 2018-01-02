@@ -1,4 +1,4 @@
-//
+﻿//
 //  Network.cpp
 //
 //  Created by Maoxu Li on 8/10/10.
@@ -23,13 +23,13 @@ bool startup()
         printf("WSAStartup failed with error: %d\n", err);
         return false;
     }
-    
+
 	/* Confirm that the WinSock DLL supports 2.2.*/
 	/* Note that if the DLL supports versions greater    */
 	/* than 2.2 in addition to 2.2, it will still return */
 	/* 2.2 in wVersion since that is the version we      */
 	/* requested.                                        */
-    
+
     if (LOBYTE(wsaData.wVersion) != 2 || HIBYTE(wsaData.wVersion) != 2)
 	{
         printf("Could not find a usable version of Winsock.dll\n");
@@ -37,7 +37,7 @@ bool startup()
         return false;
     }
 #endif
-    
+
     return true;
 }
 
@@ -68,23 +68,23 @@ struct in_addr resolveHostName(const std::string& name)
         rs = ::getaddrinfo(name.c_str(), 0, &hints, &info);
     }
     while(info == 0 && rs == EAI_AGAIN && --retry >= 0);
-    
+
     if(rs != 0)
     {
         assert(false);
     }
-    
+
     sockaddr_in* sin = reinterpret_cast<sockaddr_in*>(info->ai_addr);
     in_addr ip = sin->sin_addr;
     freeaddrinfo(info);
-    
+
     return ip;
 }
 
 std::vector<struct in_addr> getLocalAddress()
 {
     std::vector<struct in_addr> result;
-    
+
 #if defined(__linux) || defined(__APPLE__) || defined(__FreeBSD__)
     struct ifaddrs* ifap;
     if(::getifaddrs(&ifap) == SOCKET_ERROR)
@@ -110,7 +110,7 @@ std::vector<struct in_addr> getLocalAddress()
     }
     ::freeifaddrs(ifap);
 #endif
-    
+
     return result;
 }
 
@@ -129,7 +129,7 @@ UdpSocket::UdpSocket(const std::string& host, unsigned short port)
 	_sin.sin_family = AF_INET;
 	_sin.sin_port = htons(port);
 	_sin.sin_addr.s_addr = resolveHostName(host).s_addr;
- 
+
     _socket = ::socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
 	assert(_socket != INVALID_SOCKET);
 }
@@ -179,7 +179,7 @@ void UdpSocket::setRemoteAddress(const struct sockaddr_in& sin)
 
 ssize_t UdpSocket::write(const unsigned char* buf, size_t size)
 {
-	return ::sendto(_socket, buf, size, 0, (struct sockaddr*)&_sin, sizeof(_sin));
+	return ::sendto(_socket,(const char*) buf, size, 0, (struct sockaddr*)&_sin, sizeof(_sin));
 }
 
 ssize_t UdpSocket::read(unsigned char* buf, size_t size)
@@ -187,7 +187,7 @@ ssize_t UdpSocket::read(unsigned char* buf, size_t size)
     struct sockaddr_in sin;
     memset(&sin, 0, sizeof(sin));
     socklen_t len = sizeof(sin);
-	return ::recvfrom(_socket, buf, size, 0, (struct sockaddr*)&sin, &len);
+	return ::recvfrom(_socket, (char*)buf, size, 0, (struct sockaddr*)&sin, &len);
 }
 
 ssize_t UdpSocket::read(unsigned char* buf, size_t size, int timeout)
@@ -195,20 +195,20 @@ ssize_t UdpSocket::read(unsigned char* buf, size_t size, int timeout)
     struct timeval tv;
     tv.tv_sec = timeout / 1000;
     tv.tv_usec = (timeout % 1000) * 1000;
-	
+
 	fd_set fds;
     FD_ZERO(&fds);
     FD_SET(_socket, &fds);
-    
+
     int rc = ::select(sizeof(fds)*8, &fds, NULL, NULL, &tv);
     if(rc > 0 && FD_ISSET(_socket, &fds))
     {
 	    struct sockaddr_in sin;
 	    memset(&sin, 0, sizeof(sin));
 	    socklen_t len = sizeof(sin);
-		return ::recvfrom(_socket, buf, size, 0, (struct sockaddr*)&sin, &len);
+		return ::recvfrom(_socket, (char*)buf, size, 0, (struct sockaddr*)&sin, &len);
 	}
-	
+
 	return -1;
 }
 

@@ -1,4 +1,4 @@
-//
+﻿//
 //  Network.h
 //
 //  Created by Maoxu Li on 8/10/10.
@@ -44,7 +44,7 @@ typedef int socklen_t;
 #   define NETWORK_BEGIN namespace network {
 #   define NETWORK_END   }
 #else
-#   define NETWORK_BEGIN 
+#   define NETWORK_BEGIN
 #   define NETWORK_END
 #endif
 
@@ -58,18 +58,18 @@ struct in_addr resolveHostName(const std::string& name);
 std::vector<struct in_addr> getLocalAddress();
 
 class UdpSocket
-{        
+{
 public:
     UdpSocket();
 	UdpSocket(const std::string& host, unsigned short port); // Remote address
 	virtual ~UdpSocket();
-    
+
     sockaddr_in localAddress();
     sockaddr_in remoteAddress();
-    
+
     void setRemoteAddress(const std::string& host, unsigned short port);
     void setRemoteAddress(const struct sockaddr_in& sin);
-    
+
 	ssize_t write(const unsigned char* buf, size_t size);
 	ssize_t read(unsigned char* buf, size_t size);
 	ssize_t read(unsigned char* buf, size_t size, int timeout);

@@ -18,9 +18,6 @@
     <ClCompile Include="..\dns\Name.cpp">
       <Filter>dns</Filter>
     </ClCompile>
-    <ClCompile Include="..\dns\Packet.cpp">
-      <Filter>dns</Filter>
-    </ClCompile>
     <ClCompile Include="..\dns\Question.cpp">
       <Filter>dns</Filter>
     </ClCompile>
@@ -37,6 +34,15 @@
       <Filter>dns</Filter>
     </ClCompile>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="..\dns\Message.cpp">
+      <Filter>dns</Filter>
+    </ClCompile>
+    <ClCompile Include="..\dns\MXRecord.cpp">
+      <Filter>dns</Filter>
+    </ClCompile>
+    <ClCompile Include="..\dns\Network.cpp">
+      <Filter>dns</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\dns\ARecord.h">
@@ -54,9 +60,6 @@
     <ClInclude Include="..\dns\Name.h">
       <Filter>dns</Filter>
     </ClInclude>
-    <ClInclude Include="..\dns\Packet.h">
-      <Filter>dns</Filter>
-    </ClInclude>
     <ClInclude Include="..\dns\Question.h">
       <Filter>dns</Filter>
     </ClInclude>
@@ -70,6 +73,15 @@
       <Filter>dns</Filter>
     </ClInclude>
     <ClInclude Include="..\dns\TXTRecord.h">
+      <Filter>dns</Filter>
+    </ClInclude>
+    <ClInclude Include="..\dns\Message.h">
+      <Filter>dns</Filter>
+    </ClInclude>
+    <ClInclude Include="..\dns\MXRecord.h">
+      <Filter>dns</Filter>
+    </ClInclude>
+    <ClInclude Include="..\dns\Network.h">
       <Filter>dns</Filter>
     </ClInclude>
   </ItemGroup>

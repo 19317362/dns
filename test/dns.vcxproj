@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
@@ -14,18 +14,21 @@
     <ProjectGuid>{1C72D6BA-E1C0-40F4-9398-6A9979003A95}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>dns</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -87,8 +90,10 @@
     <ClCompile Include="..\dns\ARecord.cpp" />
     <ClCompile Include="..\dns\CNameRecord.cpp" />
     <ClCompile Include="..\dns\Header.cpp" />
+    <ClCompile Include="..\dns\Message.cpp" />
+    <ClCompile Include="..\dns\MXRecord.cpp" />
     <ClCompile Include="..\dns\Name.cpp" />
-    <ClCompile Include="..\dns\Packet.cpp" />
+    <ClCompile Include="..\dns\Network.cpp" />
     <ClCompile Include="..\dns\Question.cpp" />
     <ClCompile Include="..\dns\Resolver.cpp" />
     <ClCompile Include="..\dns\ResourceRecord.cpp" />
@@ -101,8 +106,10 @@
     <ClInclude Include="..\dns\CNameRecord.h" />
     <ClInclude Include="..\dns\Config.h" />
     <ClInclude Include="..\dns\Header.h" />
+    <ClInclude Include="..\dns\Message.h" />
+    <ClInclude Include="..\dns\MXRecord.h" />
     <ClInclude Include="..\dns\Name.h" />
-    <ClInclude Include="..\dns\Packet.h" />
+    <ClInclude Include="..\dns\Network.h" />
     <ClInclude Include="..\dns\Question.h" />
     <ClInclude Include="..\dns\Resolver.h" />
     <ClInclude Include="..\dns\ResourceRecord.h" />
